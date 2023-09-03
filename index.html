@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IBM TechXchange 2023 / Unleash the Power of Hybrid Multi-Cloud Applications with IBM Cloud Satellite [3670]
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="lab-guide.css">
+</head>
+
+<body  onload="checkCookie()">
+
+    <!-- header -->
+    <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+        <div class="container-fluid d-flex align-items-center">
+            <h1 class="d-flex align-items-center fs-4 text-white mb-0">
+                IBM TechXchange 2023 / Unleash the Power of Hybrid Multi-Cloud Applications with IBM Cloud Satellite [3670]
+            </h1>
+        </div>
+    </header>
+
+    <!-- right menu -->
+    <aside class="bd-aside sticky-xl-top text-body-secondary align-self-start mb-3 mb-xl-5 px-2">
+        <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">Assigned IBM Cloud e-mail</h2>
+        <input id="attendee" type="text" class="form-control is-invalid" placeholder="Attila.Szucs7+XX@test.mail.ibm.com" aria-label="Username">
+
+        <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">Table of contents</h2>
+        <nav class="small" id="toc">
+            <ul class="list-unstyled">
+                <li class="my-2">
+                    <button class="btn d-inline-flex align-items-center collapsed border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#welcome-collapse" aria-controls="welcome-collapse">Welcome</button>
+                    <ul class="list-unstyled ps-3 collapse" id="welcome-collapse">
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#session-details">Session details</a></li>
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#lab-objectives">Lab objectives</a></li>
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#lab-architecture">Lab architecture</a></li>
+                    </ul>
+                </li>
+                <li class="my-2">
+                    <button class="btn d-inline-flex align-items-center collapsed border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#excercises-collapse" aria-controls="excercises-collapse">Excercises</button>
+                    <ul class="list-unstyled ps-3 collapse" id="excercises-collapse">
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#excercise-1">Get familiar with your lab environment</a></li>
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#excercise-2">Deploy and expose public company website</a></li>
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#excercise-3">Expose intranet website internally</a></li>
+                    </ul>
+                </li>
+                <li class="my-2">
+                    <button class="btn d-inline-flex align-items-center collapsed border-0" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#end-of-lab-collapse" aria-controls="end-of-lab-collapse">End of lab</button>
+                    <ul class="list-unstyled ps-3 collapse" id="end-of-lab-collapse">
+                        <li><a class="d-inline-flex align-items-center rounded text-decoration-none" href="#congratulations">Congratulations</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- body -->
+    <div class="bd-lab-guide container-fluid bg-body">
+
+        <!-- welcome -->
+        <section id="welcome">
+            <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3">Welcome</h2>
+
+            <!-- session details -->
+            <article class="my-3" id="session-details">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Session details</h3>
+                </div>
+
+                <div>
+                    <h1>IBM TechXchange 2023 / Unleash the Power of Hybrid Multi-Cloud Applications with IBM Cloud Satellite [3670]</h1>
+
+                    <p class="my-4">Embracing a hybrid multi-cloud architecture can be transformative for businesses. It offers a flexible and secure way to handle IT infrastructure, optimize costs, and ensure maximum uptime. Meet IBM Cloud Satellite, your partner in running workloads across multiple environments — be it private or public clouds or on-premises. Ready to dive into a hands-on session with IBM Cloud Satellite? Join us to learn how you can securely and efficiently expose your applications running on multi-cloud infrastructure.</p>
+
+                    <p class="my-4">
+                        <b>Session Type:</b> Hands-on Lab<br>
+                        <b>Tech Tracks:</b> Hybrid Cloud<br>
+                        <b>Session Topic:</b> Hybrid Cloud Software<br>
+                        <b>Industry:</b> Cross Industry<br>
+                        <b>Technical Level:</b> Intermediate Level<br>
+                    </p>
+
+                    <p class="mt-4"><b>Instructors:</b></p>
+                    <ul class="my-0">
+                        <li>Attila Fábián, Lead Software Engineer, IBM Cloud</li>
+                        <li>Attila Szűcs, Software Engineer, IBM Cloud</li>
+                    </ul>
+
+                    <p class="mt-4"><b>Coordinates:</b></p>
+                    <ul class="my-0">
+                        <li>Monday, Sep 11 5:00 PM - 6:30 PM PDT</li>
+                        <li>Boulevard 159, Level 1</li>
+                    </ul>
+
+                    <a class="btn btn-outline-primary mt-4" role="button" href="https://www.ibm.com/community/ibm-techxchange-catalog/?search=3670#/" target="_blank">See this session on the conference page</a>
+                </div>
+            </article>
+
+            <!-- lab objectives -->
+            <article class="my-3" id="lab-objectives">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Lab objectives</h3>
+                </div>
+
+                <div>
+                    <ol class="mt-4">
+                        <li>Get familiar with <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-getting-started" target="_blank">IBM Cloud Satellite</a>.</li>
+                        <li>Learn how to deploy applications with <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-cluster-config" target="_blank">Satellite Config</a>.</li>
+                        <li>Explore ways to expose applications running on your Satellite location.</li>
+                        <li>Learn about <a href="https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-getting-started" target="_blank">IBM Cloud Secrets Manager</a> for secret management.</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- lab arcitecture -->
+            <article class="my-3" id="lab-architecture">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Lab architecture</h3>
+                </div>
+
+                <div>
+                    <img class="img-fluid" src="images/lab-architecture.png" />
+                    <p class="my-4">Your lab environment consist of the following components:</p>
+
+                    <ul class="mt-4">
+                        <li>Satellite location running on AWS (multi-cloud use case):</li>
+                        <ul>
+                            <li>runs with 6 hosts (3 hosts are assigned to the location control plane, 3 hosts are used as OpenShift workers)</li>
+                        </ul>
+                        <li>OpenShift cluster running on AWS Satellite location:</li>
+                        <ul>
+                            <li>workers are exposed publicly with an AWS load balancer</li>
+                        </ul>
+                        <li>Satellite location running on on-premises (hybrid-cloud use case):</li>
+                        <ul>
+                            <li>runs with 6 hosts (3 hosts are assigned to the location control plane, 3 hosts are used as OpenShift workers)</li>
+                        </ul>
+                        <li>OpenShift cluster running on on-premises Satellite location</li>
+                        <li>Jumpbox:</li>
+                        <ul>
+                            <li>connects to the AWS VPC and to the on-premises infrastructure with VPN</li>
+                        </ul>
+                    </ul>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- excercises -->
+        <section id="excercises">
+            <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3">Excercises</h2>
+
+            <!-- excercise 1 -->
+            <article class="my-3" id="excercise-1">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Get familiar with your lab environment</h3>
+                </div>
+
+                <div>
+                    <p class="my-4">In this excercise you are going to learn about the architecture of your lab environment and learn the basic commands for IBM Cloud Satellite and Red Hat OpenShift on IBM Cloud.</p>
+
+                    <h4>Open your jumpbox</h4>
+                    <p class="my-4">In the lab system, click the "Launch Lab" button.</p>
+                    <img class="img-fluid my-2" src="images/jumpbox1.png" />
+                    <p class="my-4">On the following page, you will see one virtual machine, that is your jumpbox. Click the Red Hat icon on the screen to connect.</p>
+                    <img class="img-fluid my-2" src="images/jumpbox2.png" />
+                    <p class="my-4">At this point you should be connected to the jumpbox.</p>
+                    <img class="img-fluid my-2" src="images/jumpbox3.png" />
+
+                    <h4>Login to the IBM Cloud account using CLI</h4>
+                    <p class="my-4">The jumpbox has <a href="https://cloud.ibm.com/docs/cli?topic=cli-getting-started" target="_blank">IBM Cloud CLI</a> preinstalled. To login to the IBM Cloud account open the terminal and execute the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd1-collapse" aria-expanded="false" aria-controls="cmd1-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd1-btn" onclick="copyContent('cmd1')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd1">ibmcloud login --apikey "${IBMCLOUD_API_KEY}" -r us-east</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd1-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    API endpoint: https://cloud.ibm.com
+                                    Authenticating...
+                                    OK
+                                    
+                                    Targeted account itztsglenablement204 (e54e9ad3662840dfa0293e1dac9df761) <-> 2579262
+                                    
+                                    Targeted region us-east
+                                    
+                                    
+                                    API endpoint:      https://cloud.ibm.com
+                                    Region:            us-east
+                                    User:              Attila.Szucs7@ibm.com
+                                    Account:           itztsglenablement204 (e54e9ad3662840dfa0293e1dac9df761) <-> 2579262
+                                    Resource group:    No resource group targeted, use 'ibmcloud target -g RESOURCE_GROUP'
+                                    CF API endpoint:
+                                    Org:
+                                    Space:
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">(Note: the <code>IBMCLOUD_API_KEY</code> environment variable contains an API key pregenerated for your lab user.)</p>
+
+                    <h4>Inspect Satellite locations</h4>
+                    <p class="my-4">To list Satellite locations, use the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd2-collapse" aria-expanded="false" aria-controls="cmd2-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd2-btn" onclick="copyContent('cmd2')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd2">ibmcloud sat location ls</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd2-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    Retrieving locations...
+                                    OK
+                                    Name                  ID                     Status   Ready   Created        Hosts (used/total)   Managed From
+                                    aws-location-XX       cjmvtshw0at4soomhl00   normal   yes     21 hours ago   4 / 6                wdc
+                                    on-prem-location-XX   cjn08upw04m4qsamrthg   normal   yes     21 hours ago   6 / 6                wdc
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">You should see two Satellite locations <code>aws-location-<span class="attendeeid">XX</span></code> is running on AWS hosts, while <code>on-prem-location-<span class="attendeeid">XX</span></code> runs on on-premises hosts.</p>
+                    <p class="my-4">To see the details and status of a Satellite location, you can use below command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd3-collapse" aria-expanded="false" aria-controls="cmd3-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd3-btn" onclick="copyContent('cmd3')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd3">ibmcloud sat location get --location aws-location-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd3-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    Retrieving location...
+                                    OK
+                                    
+                                    Name:                                     aws-location-XX
+                                    ID:                                       cjmvtshw0at4soomhl00
+                                    Created:                                  2023-08-29 16:21:38 +0200 (21 hours ago)
+                                    Managed From:                             wdc
+                                    State:                                    normal
+                                    Ready for deployments:                    yes
+                                    Message:                                  R0001: The Satellite location is ready for operations.
+                                    Pod subnet:                               172.16.0.0/16
+                                    Service subnet:                           172.20.0.0/16
+                                    Hosts Available:                          2
+                                    Hosts Total:                              6
+                                    Host Zones:                               us-east-1a, us-east-1b, us-east-1c
+                                    Provider:                                 -
+                                    Provider Region:                          -
+                                    Provider Credentials:                     no
+                                    Public Service Endpoint URL:              https://c107.us-east.satellite.cloud.ibm.com:32219
+                                    Private Service Endpoint URL:             -
+                                    OpenVPN Server Port:                      -
+                                    Ignition Server Port:                     -
+                                    Konnectivity Server Port:                 30881
+                                    Logging Key Set:                          no
+                                    Activity Tracker Key Set:                 no
+                                    Pod network interface selection method:   -
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">Hosts that have <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-host-reqs" target="_blank">sufficient compute, storage and network</a> can be <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-attach-hosts" target="_blank">attached to a Satellite location</a> by executing an attach script on the target machine. Once a machine is attached to a location, it can be assigned to run workloads, each location must have at least 3 machines assigned to run the control plane.</p>
+                    <p class="my-4">To list hosts attached to a Satellite location, you can use:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd4-collapse" aria-expanded="false" aria-controls="cmd4-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd4-btn" onclick="copyContent('cmd4')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd4">ibmcloud sat host ls --location aws-location-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark " id="cmd4-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    Retrieving hosts...
+                                    OK
+                                    Name               ID                     State        Status   Zone         Cluster              Worker ID                                                 Worker IP
+                                    ip-10-101-189-51   affa086f5ab748fc3f03   assigned     Ready    us-east-1c   infrastructure       sat-ip10101189-cba8e650ce7087939f4ee4d20f92573d982caa51   10.101.189.51
+                                    ip-10-101-189-58   1ee6da45821d4734c43f   unassigned   Ready    us-east-1c   -                    -                                                         -
+                                    ip-10-101-45-238   952758eef745ae5ef8ec   assigned     Ready    us-east-1a   public-services-01   sat-ip10101452-12154c4a2050a4fc7ad660c3cc2c1470da2b38f7   10.101.45.238
+                                    ip-10-101-51-202   699723991aef123ede21   assigned     Ready    us-east-1a   infrastructure       sat-ip10101512-d3e9119843c9f71835583840b54b160c4af5e24a   10.101.51.202
+                                    ip-10-101-77-68    47b4b3057641f3a21cb1   assigned     Ready    us-east-1b   infrastructure       sat-ip10101776-f4046769d74e1643e55d509de3783612e6118ce6   10.101.77.68
+                                    ip-10-101-81-73    1e507db2359197562506   unassigned   Ready    us-east-1b   -                    -                                                         -
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Quiz</h5>
+                </div>
+            </article>
+
+            <!-- excercise 2 -->
+            <article class="my-3" id="excercise-2">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Deploy and expose public company website</h3>
+                </div>
+
+                <p>TODO</p>
+            </article>
+
+            <!-- excercise 3 -->
+            <article class="my-3" id="excercise-3">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Expose intranet website internally</h3>
+                </div>
+
+                <p>TODO</p>
+            </article>
+        </section>
+
+        <!-- end -->
+        <section id="end">
+            <h2 class="sticky-xl-top fw-bold pt-3 pt-xl-5 pb-2 pb-xl-3">End of lab</h2>
+
+            <!-- excercise 1 -->
+            <article class="my-3" id="congratulations">
+                <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+                    <h3>Congratulations</h3>
+                </div>
+
+                <p>TODO</p>
+            </article>
+
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="lab-guide.js"></script>
+</body>
+
+</html>
