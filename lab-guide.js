@@ -22,7 +22,7 @@
     });
 
     // inject attendeeids
-    attendee.addEventListener("change", function () {
+    attendee.addEventListener('input', function () {
         let attendee = document.getElementById('attendee');
         let matches = attendee.value.match(/[Aa]ttila.[Ss]zucs7\+([0-9][0-9])@mail.test.ibm.com/);
         if (!matches) {
@@ -102,6 +102,8 @@ function checkCookie() {
     if (email) {
         let attendee = document.getElementById('attendee');
         attendee.value = email;
-        console.log(`attendee loaded: ${email}`);
+
+        const event = new Event('input');
+        attendee.dispatchEvent(event);
     }
 }
