@@ -81,7 +81,7 @@ function setCookie(cname, cvalue, exdays) {
 
 // get cookie
 function getCookie(cname) {
-    let name = cname + "=";
+    let name = `${cname}=`;
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -99,7 +99,7 @@ function getCookie(cname) {
 // check cookie on load
 function checkCookie() {
     let email = getCookie('attendee');
-    if (!email) {
+    if (email) {
         let attendee = document.getElementById('attendee');
         attendee.value = email;
     }
