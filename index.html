@@ -333,6 +333,255 @@
                     </div>
 
                     <h5>Quiz</h5>
+                    <p class="my-4">How many hosts does the <code>aws-location-<span class="attendeeid">XX</span></code> have and in what state?</p>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option1" data-bs-toggle="modal" data-bs-target="#quiz1incorrect">
+                        <label class="form-check-label" for="quiz1option1">
+                            6 hosts in total: 3 assigned to the Satellite control plane (<code>infrastructure</code>), 3 assigned to an OpenShift cluster (<code>public-services-<span class="attendeeid">XX</span></code>)
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option2" data-bs-toggle="modal" data-bs-target="#quiz1incorrect">
+                        <label class="form-check-label" for="quiz1option2">
+                            6 hosts in total: 3 assigned to the Satellite control plane (<code>infrastructure</code>), 3 unassigned
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option3" data-bs-toggle="modal" data-bs-target="#quiz1correct">
+                        <label class="form-check-label" for="quiz1option3">
+                            6 hosts in total: 3 assigned to the Satellite control plane (<code>infrastructure</code>), 1 assigned to an OpenShift cluster (<code>public-services-<span class="attendeeid">XX</span></code>), 2 unassigned
+                        </label>
+                    </div>
+                    <div class="modal fade" id="quiz1correct" tabindex="-1" aria-labelledby="quiz1correctlabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz1correctlabel">Correct!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Nice job! <i class="bi bi-stars"></i></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="quiz1incorrect" tabindex="-1" aria-labelledby="quiz1incorrectlabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz1incorrectlabel">Not exactly!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Run the <code>ibmcloud sat hosts ls --location aws-location-<span class="attendeeid">XX</span></code> command and inspect the <code>State</code> and <code>Cluster</code> columns in the output.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Inspect OpenShift clusters</h4>
+                    <p class="my-4">To list clusters, use the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd5-collapse" aria-expanded="false" aria-controls="cmd5-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd5-btn" onclick="copyContent('cmd5')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd5">ibmcloud oc cluster ls</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd5-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    OK
+                                    Name                 ID                     State    Created        Workers   Location              Version                  Resource Group Name   Provider
+                                    intranet-XX          cjn0s0mw0qj9takgqf40   normal   21 hours ago   3         on-prem-location-XX   4.12.24_1552_openshift   3670-lab-XX           satellite
+                                    public-services-XX   cjn0gvaw0gqg0kkgqf3g   normal   21 hours ago   1         aws-location-XX       4.12.24_1552_openshift   3670-lab-XX           satellite
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">You should see two OpenShift clusters <code>intranet-<span class="attendeeid">XX</span></code> and <code>public-services-<span class="attendeeid">XX</span></code>. Note the "Location" column in the output, the <code>intranet-<span class="attendeeid">XX</span></code> cluster is deployed onto the <code>on-prem-location-<span class="attendeeid">XX</span></code> Satellite location, while the <code>public-services-<span class="attendeeid">XX</span></code> cluster is deployed onto <code>aws-location-<span class="attendeeid">XX</span></code>. <a href="https://cloud.ibm.com/docs/openshift?topic=openshift-satellite-clusters" target="_blank">Creating an OpenShift cluster on a Satellite location</a> is pretty straight forward, you just need to select the target location when creating the cluster instead of selecting an IBM Cloud datacenter.</p>
+                    <p class="my-4">To see the details and status of a cluster, you can use below command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd6-collapse" aria-expanded="false" aria-controls="cmd6-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd6-btn" onclick="copyContent('cmd6')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd6">ibmcloud oc cluster get --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd6-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    Retrieving cluster intranet-XX...
+                                    OK
+
+                                    Name:                                     intranet-XX
+                                    ID:                                       cjn0s0mw0qj9takgqf40
+                                    State:                                    normal
+                                    Status:                                   All Workers Normal
+                                    Created:                                  2023-08-29 17:25:54 +0200 (21 hours ago)
+                                    Resource Group ID:                        5b0abcb5b3784498a534713cf6274ffb
+                                    Resource Group Name:                      3670-lab-01
+                                    Pod Subnet:                               172.30.0.0/16
+                                    Service Subnet:                           172.21.0.0/16
+                                    Workers:                                  3
+                                    Worker Zones:                             us-east-1, us-east-2, us-east-3
+                                    Ingress Subdomain:                        intranet-XX-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000.us-east.containers.appdomain.cloud
+                                    Ingress Secret:                           intranet-XX-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000
+                                    Ingress Status:                           healthy
+                                    Ingress Message:                          All Ingress components are healthy.
+                                    Public Service Endpoint URL:              https://c-01.private.us-east.link.satellite.cloud.ibm.com:33560
+                                    Private Service Endpoint URL:             https://oc4c81768101b964fdd9a-6b64a6ccc9c596bf59a86625d8fa2202-ce00.us-east.satellite.appdomain.cloud:30229
+                                    Pull Secrets:                             enabled in the default namespace
+                                    VPCs:                                     -
+                                    VPE:                                      -
+                                    Pod network interface selection method:   -
+                                    Infrastructure topology:                  highly-available
+                                    
+                                    Master
+                                    Status:     Ready (21 hours ago)
+                                    State:      deployed
+                                    Health:     normal
+                                    Version:    4.12.24_1552_openshift
+                                    Location:   on-prem-location-01
+                                    URL:        https://oc4c81768101b964fdd9a-6b64a6ccc9c596bf59a86625d8fa2202-ce00.us-east.satellite.appdomain.cloud:30229
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">To fetch the kubeconfig for a cluster, you can use the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd7-collapse" aria-expanded="false" aria-controls="cmd7-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd7-btn" onclick="copyContent('cmd7')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd7">ibmcloud oc cluster config --admin --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd7-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        OK
+                                        The configuration for cjn0s0mw0qj9takgqf40 was downloaded successfully.
+                                        
+                                        Added context for cjn0s0mw0qj9takgqf40 to the current kubeconfig file.
+                                        You can now execute 'kubectl' commands against your cluster. For example, run 'kubectl get nodes'.
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">At this point you should be able to execute kubectl or oc commands, for example:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd8-collapse" aria-expanded="false" aria-controls="cmd8-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd8-btn" onclick="copyContent('cmd8')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd8">oc get nodes</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd8-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                    NAME                      STATUS   ROLES           AGE   VERSION
+                                    techxchange-3670-host-3   Ready    master,worker   23h   v1.25.11+1485cc9
+                                    techxchange-3670-host-4   Ready    master,worker   23h   v1.25.11+1485cc9
+                                    techxchange-3670-host-5   Ready    master,worker   23h   v1.25.11+1485cc9
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Quiz</h5>
+                    <p class="my-4">How many nodes does the <code>public-services-<span class="attendeeid">XX</span></code> cluster have?</p>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option1" data-bs-toggle="modal" data-bs-target="#quiz1incorrect">
+                        <label class="form-check-label" for="quiz1option1">
+                            3
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option2" data-bs-toggle="modal" data-bs-target="#quiz1correct">
+                        <label class="form-check-label" for="quiz1option2">
+                            1
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz1" id="quiz1option3" data-bs-toggle="modal" data-bs-target="#quiz1incorrect">
+                        <label class="form-check-label" for="quiz1option3">
+                            6
+                        </label>
+                    </div>
+                    <div class="modal fade" id="quiz1correct" tabindex="-1" aria-labelledby="quiz1correctlabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz1correctlabel">Correct!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Nice job! <i class="bi bi-stars"></i></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="quiz1incorrect" tabindex="-1" aria-labelledby="quiz1incorrectlabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz1incorrectlabel">Not exactly!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Fetch the kubeconfig using the <code>ibmcloud oc cluster config --admin --cluster public-services-<span class="attendeeid">XX</span></code> command and then list the nodes with the <code>oc get nodes</code> command.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </article>
 
