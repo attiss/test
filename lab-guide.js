@@ -102,5 +102,6 @@ function checkCookie() {
     if (email) {
         let attendee = document.getElementById('attendee');
         attendee.value = email;
+        console.log(`attendee loaded: ${email}`);
     }
 }
