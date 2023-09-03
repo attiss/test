@@ -22,7 +22,7 @@
     });
 
     // inject attendeeids
-    attendee.addEventListener("input", function () {
+    attendee.addEventListener("change", function () {
         let attendee = document.getElementById('attendee');
         let matches = attendee.value.match(/[Aa]ttila.[Ss]zucs7\+([0-9][0-9])@mail.test.ibm.com/);
         if (!matches) {
