@@ -41,6 +41,8 @@
             attendeeIds.forEach(function (attendeeId) {
                 attendeeId.innerText = matches[1];
             });
+
+            setCookie('attendee', attendee.value, 1);
         }
     });
 
@@ -67,8 +69,6 @@ async function copyContent(id) {
     const tooltip = bootstrap.Tooltip.getInstance(`#${id}-btn`);
     tooltip.setContent({ '.tooltip-inner': 'copied' });
     setTimeout(() => { tooltip.setContent({ '.tooltip-inner': 'copy to clipboard' }); }, 2000);
-
-    setCookie('attendee', text, 1);
 }
 
 // set cookie
