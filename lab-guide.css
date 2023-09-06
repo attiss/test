@@ -75,7 +75,7 @@ p {
     }
 
     .bd-header {
-        position: fixed;
+        position: absolute;
         top: 0;
         /* rtl:begin:ignore */
         right: 0;
