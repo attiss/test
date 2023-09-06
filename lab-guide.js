@@ -33,6 +33,14 @@
             attendeeIds.forEach(function (attendeeId) {
                 attendeeId.innerText = 'XX';
             });
+
+            let attendeePublicIPs = Array.from(document.getElementsByClassName('attendee-public-ip'));
+            attendeePublicIPs.forEach(function (attendeePublicIP) {
+                attendeePublicIP.innerText = 'X.X.X.X';
+            });
+
+            let attendeePublicURL = document.getElementById('attendee-public-url');
+            attendeePublicURL.setAttribute('href', 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud');
         } else {
             attendee.classList.remove("is-invalid");
             attendee.classList.add("is-valid");
@@ -41,6 +49,38 @@
             attendeeIds.forEach(function (attendeeId) {
                 attendeeId.innerText = matches[1];
             });
+
+            let publicIP = 'X.X.X.X';
+            switch (matches[1]) {
+                case '01': publicIP = '44.214.21.203'; break;
+                case '02': publicIP = 'X.X.X.X'; break;
+                case '03': publicIP = 'X.X.X.X'; break;
+                case '04': publicIP = 'X.X.X.X'; break;
+                case '05': publicIP = 'X.X.X.X'; break;
+                case '06': publicIP = 'X.X.X.X'; break;
+                case '07': publicIP = '54.210.27.68'; break;
+                case '08': publicIP = '44.218.205.0'; break;
+                case '09': publicIP = 'X.X.X.X'; break;
+                case '10': publicIP = 'X.X.X.X'; break;
+                case '11': publicIP = 'X.X.X.X'; break;
+                case '12': publicIP = 'X.X.X.X'; break;
+                case '13': publicIP = 'X.X.X.X'; break;
+                case '14': publicIP = 'X.X.X.X'; break;
+                case '15': publicIP = 'X.X.X.X'; break;
+                case '16': publicIP = 'X.X.X.X'; break;
+                case '17': publicIP = 'X.X.X.X'; break;
+                case '18': publicIP = 'X.X.X.X'; break;
+                case '19': publicIP = 'X.X.X.X'; break;
+                case '20': publicIP = 'X.X.X.X'; break;
+            }
+
+            let attendeePublicIPs = Array.from(document.getElementsByClassName('attendee-public-ip'));
+            attendeePublicIPs.forEach(function (attendeePublicIP) {
+                attendeePublicIP.innerText = publicIP;
+            });
+
+            let attendeePublicURL = document.getElementById('attendee-public-url');
+            attendeePublicURL.setAttribute('href', `https://public.txc-3670-${matches[1]}.us-south.satellite.appdomain.cloud`);
 
             setCookie('attendee', attendee.value, 1);
         }
