@@ -492,12 +492,12 @@
                         <div class="card-footer collapse text-bg-dark" id="cmd7-collapse">
                             <div class="d-grid">
                                 <pre class="m-0 text-light">
-                                        OK
-                                        The configuration for cjn0s0mw0qj9takgqf40 was downloaded successfully.
-                                        
-                                        Added context for cjn0s0mw0qj9takgqf40 to the current kubeconfig file.
-                                        You can now execute 'kubectl' commands against your cluster. For example, run 'kubectl get nodes'.
-                                    </pre>
+                                    OK
+                                    The configuration for cjn0s0mw0qj9takgqf40 was downloaded successfully.
+                                    
+                                    Added context for cjn0s0mw0qj9takgqf40 to the current kubeconfig file.
+                                    You can now execute 'kubectl' commands against your cluster. For example, run 'kubectl get nodes'.
+                                </pre>
                             </div>
                         </div>
                     </div>
@@ -1110,7 +1110,356 @@
                 </div>
 
                 <div>
-                    <p class="my-4">TODO</p>
+                    <p class="my-4">In this task, you will learn how <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-cluster-config" target="_blank">Satellite Config</a> is set up to deploy the intranet website of <i>TechXchange Co.</i> to an OpenShift cluster (<code>intranet-<span class="attendeeid">XX</span></code>) deployed on a hybrid-cloud location (<code>on-prem-location-<span class="attendeeid">XX</span></code>). You will learn how to manage custom TLS certificates using <a href="https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-getting-started" target="_blank">IBM Cloud Secrets Manager</a> and how to expose an application through private DNS and secure communication with your custom TLS certificate.</p>
+
+                    <h4>Inspect Satellite Config of your intranet website deployment</h4>
+                    <p class="my-4">With the help of Satellite Config, you can easily and consistently deploy, manage, and control your applications and policies across clusters and locations. In this section you are going to learn how we set up Satellite Config to deploy the intranet website using a GitOps approach. The Kubernetes resources are located in a <a href="https://github.com/attiss/ibm-techxchange-2023-3670/blob/main/applications/intranet-website.yaml" target="_blank">public GitHub repository</a>.</p>
+                    <p class="mt-4">The setup consists of three steps:</p>
+                    <ul class="my-0">
+                        <li>Creating a configuration that defines the resources to be deployed.</li>
+                        <ul>
+                            <li>For this lab, we created a configuration that watches the <code>https://github.com/attiss/ibm-techxchange-2023-3670</code> public GitHub repository.</li>
+                        </ul>
+                        <li>Creating cluster group(s) to deploy the resources to.</li>
+                        <ul>
+                            <li>We created a group of clusters that includes all your <code>intranet-<span class="attendeeid">XX</span></code> clusters.</li>
+                        </ul>
+                        <li>Creating subscriptions to associate configuration(s) with cluster group(s).</li>
+                        <ul>
+                            <li>We created a subscription to associate the GitOps configuration with the cluster group.</li>
+                        </ul>
+                    </ul>
+                    <p class="my-4">Here is the overall configuration:</p>
+                    <img class="img-fluid my-2" src="images/satellite-config.png" />
+                    <p class="my-4">Now, let's check the application. First, fetch the Kubernetes configuration files for the <code>intranet-<span class="attendeeid">XX</span></code> cluster:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd22-collapse" aria-expanded="false" aria-controls="cmd22-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd22-btn" onclick="copyContent('cmd22')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd22">ibmcloud oc cluster config --admin --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd22-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        OK
+                                        The configuration for intranet-XX was downloaded successfully.
+                                        
+                                        Added context for intranet-XX to the current kubeconfig file.
+                                        You can now execute 'kubectl' commands against your cluster. For example, run 'kubectl get nodes'.
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">Check if the <code>intranet-website</code> pods are running in the <code>intranet-website</code> namespace:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd23-collapse" aria-expanded="false" aria-controls="cmd23-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd23-btn" onclick="copyContent('cmd23')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd23">oc get pods -n intranet-website</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd23-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        NAME                                READY   STATUS    RESTARTS   AGE
+                                        intranet-website-5679cf8d56-bk9md   1/1     Running   0          52m
+                                        intranet-website-5679cf8d56-cgm8x   1/1     Running   0          52m
+                                        intranet-website-5679cf8d56-rbbcw   1/1     Running   0          52m
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Expose intranet website on the company network</h4>
+                    <p class="my-4"><i>TechXchange Co.</i>'s DNS zone is <code>txc3670.private</code>. You are going to expose the intranet site on the <code>intranet-<span class="attendeeid">XX</span>.txc3670.private</code>. This address has already been created for you and points to the Ingress domain of your <code>intranet-<span class="attendeeid">XX</span></code> cluster. Let's validate if the DNS setup is correct.</p>
+                    <p class="my-4">To see the Ingress domain of your <code>intranet-<span class="attendeeid">XX</span></code> cluster, use the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd24-collapse" aria-expanded="false" aria-controls="cmd24-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd24-btn" onclick="copyContent('cmd24')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd24">ibmcloud oc ingress domain ls --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd24-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        OK
+                                        Domain                                                                                 Target(s)                 Default   Provider   Secret Status   Status
+                                        intranet-XX-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000.us-east.containers.appdomain.cloud   10.241.0.6,10.241.128.5   yes       akamai     created         OK
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">Try resolving the <code>intranet-<span class="attendeeid">XX</span>.txc3670.private</code> domain and compare the addresses:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd25-collapse" aria-expanded="false" aria-controls="cmd25-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd25-btn" onclick="copyContent('cmd25')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd25">dig intranet-<span class="attendeeid">XX</span>.txc3670.private</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd25-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        ; <<>> DiG 9.16.1-Ubuntu <<>> intranet-01.txc3670.private
+                                        ;; global options: +cmd
+                                        ;; Got answer:
+                                        ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 44188
+                                        ;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 0
+                                        
+                                        ;; QUESTION SECTION:
+                                        ;intranet-01.txc3670.private.	IN	A
+                                        
+                                        ;; ANSWER SECTION:
+                                        intranet-01.txc3670.private. 60	IN	CNAME	intranet-01-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000.us-east.containers.appdomain.cloud.
+                                        intranet-01-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000.us-east.containers.appdomain.cloud. 60 IN A 10.241.0.6
+                                        intranet-01-e43ebe1e9ac7c5f7ba5fce9d3d1e6c08-0000.us-east.containers.appdomain.cloud. 60 IN A 10.241.128.5
+                                        
+                                        ;; Query time: 108 msec
+                                        ;; SERVER: 161.26.0.7#53(161.26.0.7)
+                                        ;; WHEN: Thu Aug 31 23:52:33 CEST 2023
+                                        ;; MSG SIZE  rcvd: 370
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">All right, the DNS configuration is now verified. The next step is to deploy a TLS certificate that has been issued by <i>TechXchange Co.</i>'s internal CA. We already generated a certificate for your <code>intranet-<span class="attendeeid">XX</span>.txc3670.private</code> domain and uploaded it to an IBM Cloud Secrets Manager instance.</p>
+                    <p class="my-4">Open <a href="https://cloud.ibm.com" target="_blank">https://cloud.ibm.com</a> in Google Chrome and log in with the provided credentials.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-login.png" />
+                    <p class="my-4">Once logged in, select the <code>2579262 - itztsglenablement204</code> account in the account selector.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-account.png" />
+                    <p class="my-4">Open the resource list view from the left hand menu, then scroll down to the <code>Security</code> section. Open the IBM Cloud Secrets Manager instance named <code>lab-secrets</code>.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-resource-list.png" />
+                    <p class="my-4">Go to the settings page and copy the instance CRN to the clipboard.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-secrets-manager-crn.png" />
+                    <p class="my-4">You will need to associate the <code>lab-secrets</code> Secrets Manager instance with the <code>intranet-<span class="attendeeid">XX</span></code> cluster. Go back to the terminal and run the following command:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd26-collapse" aria-expanded="false" aria-controls="cmd26-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd26-btn" onclick="copyContent('cmd26')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd26">ibmcloud oc ingress instance register --crn <CRN> --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd26-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        OK
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">Let's get back to the Secret Manager instance. Select the <code>Secrets</code> menu and find your own TLS certificate. Remember, the domain you are going to use is <code>intranet-<span class="attendeeid">XX</span>.txc3670.private</code>, so look for that in the list.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-secrets-manager-secrets.png" />
+                    <p class="my-4">Click on your secret to see its details. Scroll down to the bottom to find the CRN of the secret and copy it to the clipboard.</p>
+                    <img class="img-fluid my-2" src="images/ibm-cloud-secrets-manager-secret.png" />
+                    <p class="my-4">Get back to the terminal and create a Secret resource on the <code>intranet-<span class="attendeeid">XX</span></code> cluster using the Secrets Manager secret:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd27-collapse" aria-expanded="false" aria-controls="cmd27-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd27-btn" onclick="copyContent('cmd27')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd27">ibmcloud oc ingress secret create --name intranet-<span class="attendeeid">XX</span> --cluster intranet-<span class="attendeeid">XX</span> --namespace intranet-website --cert-crn <CRN></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd27-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        OK
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">Let's check if the Secret resource is created in the <code>intranet-website</code> namespace by executing:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd28-collapse" aria-expanded="false" aria-controls="cmd28-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd28-btn" onclick="copyContent('cmd28')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd28">oc get secret -n intranet-website intranet-<span class="attendeeid">XX</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd28-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        NAME          TYPE                DATA   AGE
+                                        intranet-XX   kubernetes.io/tls   2      54s
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">At this point the DNS is verified. The secret with the TLS certificate exists on the cluster. The last step is to expose the intranet website with the OpenShift router. You can create an Ingress resource on the cluster with the appropriate configuration to achieve this.</p>
+                    <p class="my-4">Create a file using your favorite editor and save it as <code>ingress.yaml</code> with the following contents:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <button id="cmd29-btn" onclick="copyContent('cmd29')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2" id="cmd29"><code>apiVersion: networking.k8s.io/v1<br />kind: Ingress<br />metadata:<br />  name: intranet-website<br />  namespace: intranet-website<br />spec:<br />  tls:<br />  - hosts:<br />    - intranet-<span class="attendeeid">XX</span>.txc3670.private<br />    secretName: intranet-<span class="attendeeid">XX</span><br />  rules:<br />  - host: intranet-<span class="attendeeid">XX</span>.txc3670.private<br />    http:<br />      paths:<br />      - path: /<br />        pathType: Prefix<br />        backend:<br />          service:<br />            name: intranet-website<br />            port:<br />              number: 8080</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">To create the resource on the cluster, run:</p>
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end float-end">
+                                <div data-bs-toggle="collapse" href="#cmd30-collapse" aria-expanded="false" aria-controls="cmd30-collapse">
+                                    <button type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="show output">
+                                        <i class="bi bi-terminal"></i>
+                                    </button>
+                                </div>
+                                <button id="cmd30-btn" onclick="copyContent('cmd30')" type="button" class="btn btn-outline-dark" role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="copy to clipboard">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <div class="d-grid">
+                                <pre class="m-0 mt-2">$ <code id="cmd30">oc apply -f ingress.yaml</code></pre>
+                            </div>
+                        </div>
+                        <div class="card-footer collapse text-bg-dark" id="cmd30-collapse">
+                            <div class="d-grid">
+                                <pre class="m-0 text-light">
+                                        ingress.networking.k8s.io/intranet-website created
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">It is done! The intranet site should be available on the <a id="attendee-private-url" href="https://intranet-XX.txc3670.private" target="_blank">https://intranet-<span class="attendeeid">XX</span>.txc3670.private</a> domain now on the company's internal network. Open it in the browser to verify.</p>
+                    <img class="img-fluid my-2" src="images/expose-private.png" />
+
+                    <h5 class="pt-5">Quiz</h5>
+                    <p class="my-4">We managed to open the webpage using HTTPS and the browser evaluates the connection as secure even when using a custom certificate issued by <i>TechXchange Co.</i>'s private CA. How is this possible?</p>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz5" id="quiz5option1" data-bs-toggle="modal" data-bs-target="#quiz5incorrect1">
+                        <label class="form-check-label" for="quiz5option1">
+                            The private CA is an intermediate CA and the certificate chain contains a public trusted CA.
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz5" id="quiz5option2" data-bs-toggle="modal" data-bs-target="#quiz5incorrect2">
+                        <label class="form-check-label" for="quiz5option2">
+                            The certificate is trusted worldwide.
+                        </label>
+                    </div>
+                    <div class="m-0 form-check">
+                        <input class="form-check-input" type="radio" name="quiz5" id="quiz5option3" data-bs-toggle="modal" data-bs-target="#quiz5correct">
+                        <label class="form-check-label" for="quiz5option2">
+                            The jumpbox is configured to trust the private CA.
+                        </label>
+                    </div>
+                    <div class="modal fade" id="quiz5correct" tabindex="-1" aria-labelledby="quiz5correctlabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz5correctlabel">Correct!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Nice job! <i class="bi bi-stars"></i></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="quiz5incorrect1" tabindex="-1" aria-labelledby="quiz5incorrect1label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz5incorrect1label">Not exactly!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">The certificate chain contains a leaf certificate for <code>intranet-<span class="attendeeid">XX</span>.txc3670.private</code> that is signed by the private CA (<code>techxchange3670.tmp</code>).</p>
+                                    <img class="img-fluid my-2" src="images/certificate.png" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="quiz5incorrect2" tabindex="-1" aria-labelledby="quiz5incorrect2label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="quiz5incorrect2label">Not exactly!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="my-4">Browsers (and operating systems) usually have a list of trusted CAs that do not include private CAs.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </article>
         </section>

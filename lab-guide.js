@@ -41,6 +41,9 @@
 
             let attendeePublicURL = document.getElementById('attendee-public-url');
             attendeePublicURL.setAttribute('href', 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud');
+
+            let attendeePrivateURL = document.getElementById('attendee-private-url');
+            attendeePrivateURL.setAttribute('href', 'https://intranet-XX.txc3670.private');
         } else {
             attendee.classList.remove("is-invalid");
             attendee.classList.add("is-valid");
@@ -81,6 +84,9 @@
 
             let attendeePublicURL = document.getElementById('attendee-public-url');
             attendeePublicURL.setAttribute('href', `https://public.txc-3670-${matches[1]}.us-south.satellite.appdomain.cloud`);
+
+            let attendeePrivateURL = document.getElementById('attendee-private-url');
+            attendeePrivateURL.setAttribute('href', `https://intranet-${matches[1]}.txc3670.private`);
 
             setCookie('attendee', attendee.value, 1);
         }
