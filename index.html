@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="lab-guide.css">
+    <link rel="stylesheet" href="resources/lab-guide.css">
 </head>
 
 <body onload="checkCookie()">
@@ -696,7 +696,7 @@
                         </label>
                     </div>
                     <div class="modal fade" id="quiz3correct" tabindex="-1" aria-labelledby="quiz3correctlabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                        <div class="modal-dialog modal-dialog-scrollable modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="quiz3correctlabel">Correct!</h1>
@@ -852,13 +852,13 @@
                                 <pre class="m-0 text-light">
                                     Retrieving hosts...
                                     OK
-                                    Name               ID                     State      Status   Zone         Cluster              Worker ID                                                 Worker IP
-                                    ip-10-101-189-51   affa086f5ab748fc3f03   assigned   Ready    us-east-1c   infrastructure       sat-ip10101189-cba8e650ce7087939f4ee4d20f92573d982caa51   10.101.189.51
-                                    ip-10-101-189-58   1ee6da45821d4734c43f   assigned   Ready    us-east-1c   public-services-XX   sat-ip10101189-93e38f7b54843630c3154699cba9c19b4e802485   10.101.189.58
-                                    ip-10-101-45-238   952758eef745ae5ef8ec   assigned   Ready    us-east-1a   public-services-XX   sat-ip10101452-12154c4a2050a4fc7ad660c3cc2c1470da2b38f7   10.101.45.238
-                                    ip-10-101-51-202   699723991aef123ede21   assigned   Ready    us-east-1a   infrastructure       sat-ip10101512-d3e9119843c9f71835583840b54b160c4af5e24a   10.101.51.202
-                                    ip-10-101-77-68    47b4b3057641f3a21cb1   assigned   Ready    us-east-1b   infrastructure       sat-ip10101776-f4046769d74e1643e55d509de3783612e6118ce6   10.101.77.68
-                                    ip-10-101-81-73    1e507db2359197562506   assigned   Ready    us-east-1b   public-services-XX   sat-ip10101817-3a851bca9528391d038e6666a1ee8653d719a04c   10.101.81.73
+                                    Name               ID                     State      Status         Zone         Cluster              Worker ID                                                 Worker IP
+                                    ip-10-101-189-51   affa086f5ab748fc3f03   assigned   Ready          us-east-1c   infrastructure       sat-ip10101189-cba8e650ce7087939f4ee4d20f92573d982caa51   10.101.189.51
+                                    ip-10-101-189-58   1ee6da45821d4734c43f   assigned   Provisioning   us-east-1c   public-services-XX   sat-ip10101189-93e38f7b54843630c3154699cba9c19b4e802485   10.101.189.58
+                                    ip-10-101-45-238   952758eef745ae5ef8ec   assigned   Ready          us-east-1a   public-services-XX   sat-ip10101452-12154c4a2050a4fc7ad660c3cc2c1470da2b38f7   10.101.45.238
+                                    ip-10-101-51-202   699723991aef123ede21   assigned   Ready          us-east-1a   infrastructure       sat-ip10101512-d3e9119843c9f71835583840b54b160c4af5e24a   10.101.51.202
+                                    ip-10-101-77-68    47b4b3057641f3a21cb1   assigned   Ready          us-east-1b   infrastructure       sat-ip10101776-f4046769d74e1643e55d509de3783612e6118ce6   10.101.77.68
+                                    ip-10-101-81-73    1e507db2359197562506   assigned   Provisioning   us-east-1b   public-services-XX   sat-ip10101817-3a851bca9528391d038e6666a1ee8653d719a04c   10.101.81.73
                                 </pre>
                             </div>
                         </div>
@@ -1045,8 +1045,10 @@
                         </div>
                     </div>
                     <p class="my-4">The DNS update might take a few minutes, but once the update is completed, you should be able to access <i>TechXchange Co.</i>'s public website through the <code>public.txc-3670-<span class="attendeeid">XX</span>.us-south.satellite.appdomain.cloud</code> URL.</p>
-                    <p class="my-4">Open Google Chrome on the jumpbox again, and visit the <a id="attendee-public-url" href="https://public.txc-3670-XX.us-south.satellite.appdomain.cloud" target="_blank">https://public.txc-3670-<span class="attendeeid">XX</span>.us-south.satellite.appdomain.cloud</a> address. (You can also try opening the site from your mobile device.)</p>
+                    <p class="my-4">Open Google Chrome on the jumpbox again, and visit the <a id="attendee-public-url" href="https://public.txc-3670-XX.us-south.satellite.appdomain.cloud" target="_blank">https://public.txc-3670-<span class="attendeeid">XX</span>.us-south.satellite.appdomain.cloud</a> address.
                     <img class="img-fluid my-2" src="images/expose-public.png" />
+                    <p class="my-4">You can also open the site from your mobile device by scanning the below QR code:</p>
+                    <div id="qrcode" class="m-0 p-1"></div>
 
                     <h5>Quiz</h5>
                     <p class="my-4">We managed to open the webpage using HTTPS and the browser evaluates the connection as secure. This is because for every managed domain (<code>*.satellite.appdomain.cloud</code> and <code>*.containers.appdomain.cloud</code>) IBM Cloud generates a TLS certificates. Who is the issuer of the certificate?</p>
@@ -1283,7 +1285,7 @@
                                 </button>
                             </div>
                             <div class="d-grid">
-                                <pre class="m-0 mt-2">$ <code id="cmd26">ibmcloud oc ingress instance register --crn <CRN> --cluster intranet-<span class="attendeeid">XX</span></code></pre>
+                                <pre class="m-0 mt-2">$ <code id="cmd26">ibmcloud oc ingress instance register --cluster intranet-<span class="attendeeid">XX</span> --crn CRN</code></pre>
                             </div>
                         </div>
                         <div class="card-footer collapse text-bg-dark" id="cmd26-collapse">
@@ -1312,7 +1314,7 @@
                                 </button>
                             </div>
                             <div class="d-grid">
-                                <pre class="m-0 mt-2">$ <code id="cmd27">ibmcloud oc ingress secret create --name intranet-<span class="attendeeid">XX</span> --cluster intranet-<span class="attendeeid">XX</span> --namespace intranet-website --cert-crn <CRN></code></pre>
+                                <pre class="m-0 mt-2">$ <code id="cmd27">ibmcloud oc ingress secret create --name intranet-<span class="attendeeid">XX</span> --cluster intranet-<span class="attendeeid">XX</span> --namespace intranet-website --cert-crn CRN</code></pre>
                             </div>
                         </div>
                         <div class="card-footer collapse text-bg-dark" id="cmd27-collapse">
@@ -1490,7 +1492,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="lab-guide.js"></script>
+    <script src="resources/qrcode/qrcode.js"></script>
+    <script src="resources/lab-guide.js"></script>
 </body>
 
 </html>

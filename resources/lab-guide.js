@@ -1,6 +1,14 @@
 (() => {
     'use strict'
 
+    const placeholderPublicURL = 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud';
+
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 150,
+        height : 150
+    });
+    qrcode.makeCode(placeholderPublicURL);
+
     // remove indentation from <pre> blocks
     document.querySelectorAll('pre').forEach(function (code) {
         let lines = code.textContent.split('\n');
@@ -64,8 +72,11 @@
                 attendeePublicIP.innerText = publicIP;
             });
 
+            let publicURL = `https://public.txc-3670-${attendeeID}.us-south.satellite.appdomain.cloud`
             let attendeePublicURL = document.getElementById('attendee-public-url');
-            attendeePublicURL.setAttribute('href', `https://public.txc-3670-${attendeeID}.us-south.satellite.appdomain.cloud`);
+            attendeePublicURL.setAttribute('href', publicURL);
+
+            qrcode.makeCode(publicURL);
 
             let attendeePrivateURL = document.getElementById('attendee-private-url');
             attendeePrivateURL.setAttribute('href', `https://intranet-${attendeeID}.txc3670.private`);
@@ -86,7 +97,9 @@
             });
 
             let attendeePublicURL = document.getElementById('attendee-public-url');
-            attendeePublicURL.setAttribute('href', 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud');
+            attendeePublicURL.setAttribute('href', placeholderPublicURL);
+
+            qrcode.makeCode(placeholderPublicURL);
 
             let attendeePrivateURL = document.getElementById('attendee-private-url');
             attendeePrivateURL.setAttribute('href', 'https://intranet-XX.txc3670.private');

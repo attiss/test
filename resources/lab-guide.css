@@ -138,3 +138,8 @@ p {
         z-index: 1;
     }
 }
+
+#qrcode {
+    width: 150px;
+    height: 150px;
+}
