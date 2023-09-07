@@ -24,37 +24,19 @@
     // inject attendeeids
     attendee.addEventListener('input', function () {
         let attendee = document.getElementById('attendee');
-        let matches = attendee.value.match(/[Aa]ttila.[Ss]zucs7\+([0-9][0-9])@mail.test.ibm.com/);
-        if (!matches) {
-            attendee.classList.remove("is-valid");
-            attendee.classList.add("is-invalid");
-
-            let attendeeIds = Array.from(document.getElementsByClassName('attendeeid'));
-            attendeeIds.forEach(function (attendeeId) {
-                attendeeId.innerText = 'XX';
-            });
-
-            let attendeePublicIPs = Array.from(document.getElementsByClassName('attendee-public-ip'));
-            attendeePublicIPs.forEach(function (attendeePublicIP) {
-                attendeePublicIP.innerText = 'X.X.X.X';
-            });
-
-            let attendeePublicURL = document.getElementById('attendee-public-url');
-            attendeePublicURL.setAttribute('href', 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud');
-
-            let attendeePrivateURL = document.getElementById('attendee-private-url');
-            attendeePrivateURL.setAttribute('href', 'https://intranet-XX.txc3670.private');
-        } else {
+        if (attendee.value >= 1 && attendee.value <= 25) {
             attendee.classList.remove("is-invalid");
             attendee.classList.add("is-valid");
 
-            let attendeeIds = Array.from(document.getElementsByClassName('attendeeid'));
-            attendeeIds.forEach(function (attendeeId) {
-                attendeeId.innerText = matches[1];
+            let attendeeID = String(attendee.value).padStart(2, '0');
+
+            let attendeeIDComponents = Array.from(document.getElementsByClassName('attendeeid'));
+            attendeeIDComponents.forEach(function (attendeeIDComponent) {
+                attendeeIDComponent.innerText = attendeeID;
             });
 
             let publicIP = 'X.X.X.X';
-            switch (matches[1]) {
+            switch (attendeeID) {
                 case '01': publicIP = '44.214.21.203'; break;
                 case '02': publicIP = 'X.X.X.X'; break;
                 case '03': publicIP = 'X.X.X.X'; break;
@@ -83,12 +65,31 @@
             });
 
             let attendeePublicURL = document.getElementById('attendee-public-url');
-            attendeePublicURL.setAttribute('href', `https://public.txc-3670-${matches[1]}.us-south.satellite.appdomain.cloud`);
+            attendeePublicURL.setAttribute('href', `https://public.txc-3670-${attendeeID}.us-south.satellite.appdomain.cloud`);
 
             let attendeePrivateURL = document.getElementById('attendee-private-url');
-            attendeePrivateURL.setAttribute('href', `https://intranet-${matches[1]}.txc3670.private`);
+            attendeePrivateURL.setAttribute('href', `https://intranet-${attendeeID}.txc3670.private`);
 
             setCookie('attendee', attendee.value, 1);
+        } else {
+            attendee.classList.remove("is-valid");
+            attendee.classList.add("is-invalid");
+
+            let attendeeIds = Array.from(document.getElementsByClassName('attendeeid'));
+            attendeeIds.forEach(function (attendeeId) {
+                attendeeId.innerText = 'XX';
+            });
+
+            let attendeePublicIPs = Array.from(document.getElementsByClassName('attendee-public-ip'));
+            attendeePublicIPs.forEach(function (attendeePublicIP) {
+                attendeePublicIP.innerText = 'X.X.X.X';
+            });
+
+            let attendeePublicURL = document.getElementById('attendee-public-url');
+            attendeePublicURL.setAttribute('href', 'https://public.txc-3670-XX.us-south.satellite.appdomain.cloud');
+
+            let attendeePrivateURL = document.getElementById('attendee-private-url');
+            attendeePrivateURL.setAttribute('href', 'https://intranet-XX.txc3670.private');
         }
     });
 
